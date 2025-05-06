@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RecipeRepo extends MongoRepository<Recipe,Integer> {
+public interface RecipeRepo extends MongoRepository<Recipe,String> {
     @Query("{ 'id': ?0 }")
     Recipe getRecipeById(Integer id);
 
