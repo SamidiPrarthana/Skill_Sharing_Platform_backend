@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class RecipeDto {
 
-    private int id;
+    private String id;
     private String recipeName;
     private String recipeDescription;
     private String tips;

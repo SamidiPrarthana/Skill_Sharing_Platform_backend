@@ -27,21 +27,29 @@ public class RecipeController {
     }
 
     @PostMapping("/save")
-    public RecipeDto saveRecipe(@RequestBody RecipeDto recipeDto){
+    public RecipeDto saveRecipe(@RequestBody RecipeDto recipeDto) {
         return recipeService.saveRecipe(recipeDto);
     }
 
-    @PutMapping("/update")
-    public RecipeDto updateRecipe(@RequestBody RecipeDto recipeDto){
+    @PutMapping("/update/{id}")
+    public RecipeDto updateRecipe(
+            @PathVariable String id,
+            @RequestBody RecipeDto recipeDto) {
+        recipeDto.setId(id);
         return recipeService.updateRecipe(recipeDto);
     }
-    @DeleteMapping("/delete")
-    public boolean deleteRecipe(@RequestBody RecipeDto recipeDto){
-        return recipeService.deleteRecipe(recipeDto);
+
+
+    @DeleteMapping("/delete/{id}")
+    public Map<String, Boolean> deleteRecipe(@PathVariable String id) {
+        boolean deleted = recipeService.deleteRecipe(id);
+        return Map.of("deleted", deleted);
     }
 
+
     @GetMapping("/get/{id}")
-    public RecipeDto getRecipeById(@PathVariable Integer id){
+    public RecipeDto getOne(@PathVariable String id) {
         return recipeService.getRecipeById(id);
     }
 }
+
