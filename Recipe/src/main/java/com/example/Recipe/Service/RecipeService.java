@@ -34,13 +34,17 @@ public class RecipeService {
         return recipeDto;
     }
 
-    public boolean deleteRecipe(RecipeDto recipeDto){
-        recipeRepo.delete(modelMapper.map(recipeDto,Recipe.class));
+
+
+    public boolean deleteRecipe(String id) {
+        recipeRepo.deleteById(id);
         return true;
     }
 
-    public RecipeDto getRecipeById(Integer id){
-        Recipe recipe = recipeRepo.getRecipeById(Integer.valueOf(id));
-        return modelMapper.map(recipe,RecipeDto.class);
+    public RecipeDto getRecipeById(String id) {
+        Recipe r = recipeRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Recipe not found"));
+        return modelMapper.map(r, RecipeDto.class);
     }
+
 }
