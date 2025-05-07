@@ -1,7 +1,7 @@
-package com.example.springmongoproject.Service;
+package com.example.Recipe.Service;
 
-import com.example.springmongoproject.Model.Plan;
-import com.example.springmongoproject.Repo.PlanRepo;
+import com.example.Recipe.entity.Plan;
+import com.example.Recipe.Repo.PlanRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

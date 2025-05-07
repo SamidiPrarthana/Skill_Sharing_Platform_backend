@@ -1,7 +1,7 @@
-package com.example.springmongoproject.Controller;
+package com.example.Recipe.Controller;
 
-import com.example.springmongoproject.Model.Plan;
-import com.example.springmongoproject.Service.PlanService;
+import com.example.Recipe.entity.Plan;
+import com.example.Recipe.Service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

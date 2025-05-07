@@ -1,4 +1,4 @@
-package com.example.springmongoproject.Model;
+package com.example.Recipe.entity;
 
 import lombok.Builder;
 import lombok.Data;

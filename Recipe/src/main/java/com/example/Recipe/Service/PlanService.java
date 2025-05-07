@@ -1,6 +1,6 @@
-package com.example.springmongoproject.Service;
+package com.example.Recipe.Service;
 
-import com.example.springmongoproject.Model.Plan;
+import com.example.Recipe.entity.Plan;
 
 import java.util.List;
 
