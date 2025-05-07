@@ -3,6 +3,8 @@ package com.example.Recipe.Controller;
 import com.example.Recipe.entity.Plan;
 import com.example.Recipe.Service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +17,17 @@ public class PlanController {
     private PlanService planService;
 
     @PostMapping("/save")
-    public String savePlan(@RequestBody Plan plan) {
-        return planService.savePlan(plan);
+    public ResponseEntity<?> savePlan(@RequestBody Plan plan) {
+        try {
+            if (plan.getPlanTitle() == null || plan.getPlanTitle().trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("Plan title is required.");
+            }
+            String savedId = planService.savePlan(plan);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Plan saved with ID: " + savedId);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error saving plan: " + e.getMessage());
+        }
     }
     @GetMapping("/all")
     public List<Plan> getAllPlan() {
