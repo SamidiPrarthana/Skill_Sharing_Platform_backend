@@ -28,9 +28,7 @@ public class RecipeController {
     }
 
     @PostMapping("/save")
-    public RecipeDto saveRecipe(@RequestBody RecipeDto recipeDto,
-                                @RequestPart List<MultipartFile> mediaFiles) {
-        recipeDto.setMediaFiles(mediaFiles);
+    public RecipeDto saveRecipe(@RequestBody RecipeDto recipeDto) {
         return recipeService.saveRecipe(recipeDto);
     }
 
