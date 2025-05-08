@@ -29,14 +29,30 @@ public class PlanController {
                     .body("Error saving plan: " + e.getMessage());
         }
     }
+    // GET all plans
     @GetMapping("/all")
-    public List<Plan> getAllPlan() {
-        return planService.findAllPlan();
+    public ResponseEntity<?> getAllPlan() {
+        try {
+            List<Plan> plans = planService.findAllPlan();
+            return ResponseEntity.ok(plans);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error fetching plans: " + e.getMessage());
+        }
     }
 
+    // GET plan by ID
     @GetMapping("/get/{planId}")
-    public Plan getPlanById(@PathVariable String planId) {
-        return planService.getPlanById(planId);
+    public ResponseEntity<?> getPlanById(@PathVariable String planId) {
+        try {
+            Plan plan = planService.getPlanById(planId);
+            return ResponseEntity.ok(plan);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error retrieving plan: " + e.getMessage());
+        }
     }
 
 
