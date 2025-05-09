@@ -55,11 +55,21 @@ public class PlanController {
         }
     }
 
-
-
+    // UPDATE a plan
     @PutMapping("/update/{planId}")
-    public Plan updatePlan(@PathVariable String planId, @RequestBody Plan updatedPlan) {
-        return planService.updatePlan(planId, updatedPlan);
+    public ResponseEntity<?> updatePlan(@PathVariable String planId, @RequestBody Plan updatedPlan) {
+        try {
+            if (updatedPlan.getPlanTitle() == null || updatedPlan.getPlanTitle().trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("Plan title is required for update.");
+            }
+            Plan updated = planService.updatePlan(planId, updatedPlan);
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error updating plan: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/delete/{planId}")
