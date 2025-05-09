@@ -72,10 +72,18 @@ public class PlanController {
         }
     }
 
+    //DELETE a plan
     @DeleteMapping("/delete/{planId}")
-    public String deletePlan(@PathVariable String planId) {
-        planService.deletePlan(planId);
-        return "Plan with ID " + planId + " deleted successfully!";
+    public ResponseEntity<?> deletePlan(@PathVariable String planId) {
+        try {
+            planService.deletePlan(planId);
+            return ResponseEntity.ok("Plan with ID " + planId + " deleted successfully!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error deleting plan: " + e.getMessage());
+        }
     }
 
 }
