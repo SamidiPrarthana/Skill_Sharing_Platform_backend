@@ -21,5 +21,5 @@ public class Recipe {
     private String recipeName;
     private String recipeDescription;
     private String tips;
-
+    private String file;
 }
