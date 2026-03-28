@@ -48,7 +48,7 @@ public class RecipeController {
     }
 
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get")
     public RecipeDto getOne(@PathVariable String id) {
         return recipeService.getRecipeById(id);
     }
